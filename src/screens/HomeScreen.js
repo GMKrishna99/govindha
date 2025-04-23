@@ -98,9 +98,17 @@ const HomeScreen = ({ navigation }) => {
           <Text style={styles.greeting}>Hello, User</Text>
           <Text style={styles.subGreeting}>Find your perfect jewelry</Text>
         </View>
-        <TouchableOpacity style={styles.searchButton}>
-          <Icon name="search" size={24} color="#333" />
-        </TouchableOpacity>
+        <View style={styles.headerButtons}>
+          <TouchableOpacity 
+            style={styles.headerButton}
+            onPress={() => navigation.navigate('Coupons')}
+          >
+            <Icon name="ticket" size={24} color="#333" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.headerButton}>
+            <Icon name="search" size={24} color="#333" />
+          </TouchableOpacity>
+        </View>
       </View>
 
       <View style={styles.bannerContainer}>
@@ -184,13 +192,18 @@ const styles = StyleSheet.create({
     color: '#888',
     marginTop: 5,
   },
-  searchButton: {
+  headerButtons: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  headerButton: {
     width: 40,
     height: 40,
     backgroundColor: '#F5F5F5',
     borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
+    marginLeft: 10,
   },
   bannerContainer: {
     marginHorizontal: 20,

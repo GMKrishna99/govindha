@@ -19,6 +19,13 @@ import WishlistScreen from './src/screens/WishlistScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import CheckoutScreen from './src/screens/CheckoutScreen';
 import OrderConfirmationScreen from './src/screens/OrderConfirmationScreen';
+import CouponScreen from './src/screens/CouponScreen';
+import OrdersScreen from './src/screens/OrdersScreen';
+import AddressesScreen from './src/screens/AddressesScreen';
+import PaymentMethodsScreen from './src/screens/PaymentMethodsScreen';
+import NotificationsScreen from './src/screens/NotificationsScreen';
+import SettingsScreen from './src/screens/SettingsScreen';
+import SupportScreen from './src/screens/SupportScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -71,6 +78,13 @@ const App = () => {
         <Stack.Screen name="ProductDetails" component={ProductDetailsScreen} />
         <Stack.Screen name="Checkout" component={CheckoutScreen} />
         <Stack.Screen name="OrderConfirmation" component={OrderConfirmationScreen} />
+        <Stack.Screen name="Coupons" component={CouponScreen} />
+        <Stack.Screen name="Orders" component={OrdersScreen} />
+        <Stack.Screen name="Addresses" component={AddressesScreen} />
+        <Stack.Screen name="PaymentMethods" component={PaymentMethodsScreen} />
+        <Stack.Screen name="Notifications" component={NotificationsScreen} />
+        <Stack.Screen name="Settings" component={SettingsScreen} />
+        <Stack.Screen name="Support" component={SupportScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
