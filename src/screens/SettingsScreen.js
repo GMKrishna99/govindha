@@ -222,18 +222,10 @@ const SettingsScreen = ({navigation}) => {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Account</Text>
 
-          <TouchableOpacity style={styles.actionItem}>
+          <TouchableOpacity
+            style={styles.actionItem}
+            onPress={() => navigation.navigate('ChangePassword')}>
             <Text style={styles.actionText}>Change Password</Text>
-            <Icon name="chevron-forward" size={18} color="#888" />
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.actionItem}>
-            <Text style={styles.actionText}>Payment Methods</Text>
-            <Icon name="chevron-forward" size={18} color="#888" />
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.actionItem}>
-            <Text style={styles.actionText}>Shipping Addresses</Text>
             <Icon name="chevron-forward" size={18} color="#888" />
           </TouchableOpacity>
 

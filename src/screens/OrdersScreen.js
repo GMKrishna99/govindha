@@ -3,15 +3,14 @@ import {
   View,
   Text,
   StyleSheet,
-  ScrollView,
+  FlatList,
   TouchableOpacity,
   Image,
 } from 'react-native';
-import {FlatList} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const OrdersScreen = ({navigation}) => {
-  // Sample order data - replace with your actual data
+  // Sample order data
   const orders = [
     {
       id: '1',
@@ -53,10 +52,14 @@ const OrdersScreen = ({navigation}) => {
     },
   ];
 
+  const navigateToOrderTracking = order => {
+    navigation.navigate('OrderTracking', {order});
+  };
+
   const renderOrderItem = ({item}) => (
     <TouchableOpacity
       style={styles.orderCard}
-      onPress={() => navigation.navigate('OrderDetails', {order: item})}>
+      onPress={() => navigateToOrderTracking(item)}>
       <View style={styles.orderHeader}>
         <Text style={styles.orderNumber}>{item.orderNumber}</Text>
         <Text
@@ -84,7 +87,9 @@ const OrdersScreen = ({navigation}) => {
 
       <View style={styles.orderFooter}>
         <Text style={styles.totalText}>Total: {item.total}</Text>
-        <TouchableOpacity style={styles.trackButton}>
+        <TouchableOpacity
+          style={styles.trackButton}
+          onPress={() => navigateToOrderTracking(item)}>
           <Text style={styles.trackButtonText}>
             {item.status === 'Delivered' ? 'View Details' : 'Track Order'}
           </Text>

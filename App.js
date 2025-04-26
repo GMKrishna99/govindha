@@ -27,6 +27,11 @@ import NotificationsScreen from './src/screens/NotificationsScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
 import SupportScreen from './src/screens/SupportScreen';
 import ChangePasswordScreen from './src/screens/ChangePasswordScreen';
+import EditAddressScreen from './src/screens/EditAddressScreen';
+import AddAddressScreen from './src/screens/AddAddressScreen';
+import AddPaymentScreen from './src/screens/AddPaymentScreen';
+import EditPaymentScreen from './src/screens/EditPaymentScreen';
+import OrderTrackingScreen from './src/screens/TrackingScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -91,6 +96,11 @@ const App = () => {
         <Stack.Screen name="Settings" component={SettingsScreen} />
         <Stack.Screen name="ChangePassword" component={ChangePasswordScreen} />
         <Stack.Screen name="Support" component={SupportScreen} />
+        <Stack.Screen name="EditAddress" component={EditAddressScreen} />
+        <Stack.Screen name="AddAddress" component={AddAddressScreen} />
+        <Stack.Screen name="AddPaymentMethod" component={AddPaymentScreen} />
+        <Stack.Screen name="EditPaymentMethod" component={EditPaymentScreen} />
+        <Stack.Screen name="OrderTracking" component={OrderTrackingScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
