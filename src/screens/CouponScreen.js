@@ -1,8 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const CouponScreen = ({ navigation }) => {
+const CouponScreen = ({navigation}) => {
   const coupons = [
     {
       id: '1',
@@ -10,7 +17,20 @@ const CouponScreen = ({ navigation }) => {
       discount: '30%',
       description: 'Get 30% off on your first purchase',
       expiry: 'Valid until: 31 Dec 2024',
-      image: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=400'
+      image:
+        'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=400',
+      terms: [
+        'Valid only for first-time customers',
+        'Minimum purchase of $100 required',
+        'Cannot be combined with other offers',
+        'Valid on all jewelry categories',
+      ],
+      howToUse: [
+        'Add items to your cart',
+        'Proceed to checkout',
+        'Enter coupon code WELCOME30',
+        'Discount will be applied automatically',
+      ],
     },
     {
       id: '2',
@@ -18,7 +38,20 @@ const CouponScreen = ({ navigation }) => {
       discount: '50%',
       description: '50% off on gold jewelry',
       expiry: 'Valid until: 15 Jan 2025',
-      image: 'https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=400'
+      image:
+        'https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=400',
+      terms: [
+        'Valid only on gold jewelry items',
+        'No minimum purchase required',
+        'Limited to one use per customer',
+        'Valid on select gold collections',
+      ],
+      howToUse: [
+        'Add gold jewelry items to your cart',
+        'Proceed to checkout',
+        'Enter coupon code GOLD50',
+        'Discount will be applied automatically',
+      ],
     },
     {
       id: '3',
@@ -26,13 +59,33 @@ const CouponScreen = ({ navigation }) => {
       discount: '25%',
       description: '25% off on diamond collection',
       expiry: 'Valid until: 28 Feb 2025',
-      image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=400'
-    }
+      image:
+        'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=400',
+      terms: [
+        'Valid only on diamond jewelry',
+        'Minimum purchase of $500 required',
+        'Cannot be used on sale items',
+        'Valid on all diamond collections',
+      ],
+      howToUse: [
+        'Add diamond jewelry to your cart',
+        'Proceed to checkout',
+        'Enter coupon code DIAMOND25',
+        'Discount will be applied automatically',
+      ],
+    },
   ];
 
-  const renderCoupon = (coupon) => (
-    <View key={coupon.id} style={styles.couponContainer}>
-      <Image source={{ uri: coupon.image }} style={styles.couponImage} />
+  const handleCouponPress = coupon => {
+    navigation.navigate('CouponDetails', {coupon});
+  };
+
+  const renderCoupon = coupon => (
+    <TouchableOpacity
+      key={coupon.id}
+      style={styles.couponContainer}
+      onPress={() => handleCouponPress(coupon)}>
+      <Image source={{uri: coupon.image}} style={styles.couponImage} />
       <View style={styles.couponContent}>
         <View style={styles.couponHeader}>
           <Text style={styles.discountText}>{coupon.discount} OFF</Text>
@@ -40,26 +93,33 @@ const CouponScreen = ({ navigation }) => {
         </View>
         <Text style={styles.descriptionText}>{coupon.description}</Text>
         <Text style={styles.expiryText}>{coupon.expiry}</Text>
-        <TouchableOpacity style={styles.copyButton}>
+        <TouchableOpacity
+          style={styles.copyButton}
+          onPress={e => {
+            e.stopPropagation(); // Prevent triggering the parent press
+            // Add copy functionality here
+          }}>
           <Text style={styles.copyButtonText}>Copy Code</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={styles.backButton}>
           <Icon name="arrow-back" size={24} color="#333" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>My Coupons</Text>
       </View>
-      
-      <View style={styles.couponsList}>
-        {coupons.map(renderCoupon)}
-      </View>
-    </ScrollView>
+
+      <ScrollView style={styles.scrollContainer}>
+        <View style={styles.couponsList}>{coupons.map(renderCoupon)}</View>
+      </ScrollView>
+    </View>
   );
 };
 
@@ -68,12 +128,17 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFF',
   },
+  scrollContainer: {
+    flex: 1,
+  },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingTop: 50,
     paddingBottom: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: '#F0F0F0',
   },
   backButton: {
     marginRight: 15,
@@ -147,4 +212,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CouponScreen; 
+export default CouponScreen;

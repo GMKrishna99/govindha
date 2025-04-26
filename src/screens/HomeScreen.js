@@ -136,7 +136,7 @@ const HomeScreen = ({navigation}) => {
           <TouchableOpacity
             style={styles.headerButton}
             onPress={() => navigation.navigate('Coupons')}>
-            <Icon name="ticket" size={24} color="#333" />
+            <Icon name="gift-outline" size={24} color="#333" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.headerButton}>
             <Icon name="search" size={24} color="#333" />

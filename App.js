@@ -32,6 +32,7 @@ import AddAddressScreen from './src/screens/AddAddressScreen';
 import AddPaymentScreen from './src/screens/AddPaymentScreen';
 import EditPaymentScreen from './src/screens/EditPaymentScreen';
 import OrderTrackingScreen from './src/screens/TrackingScreen';
+import CouponDetailsScreen from './src/screens/CouponDetailsScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -101,6 +102,7 @@ const App = () => {
         <Stack.Screen name="AddPaymentMethod" component={AddPaymentScreen} />
         <Stack.Screen name="EditPaymentMethod" component={EditPaymentScreen} />
         <Stack.Screen name="OrderTracking" component={OrderTrackingScreen} />
+        <Stack.Screen name="CouponDetails" component={CouponDetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
