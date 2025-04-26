@@ -1,9 +1,9 @@
 // App.js
 import React from 'react';
-import { StatusBar } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {StatusBar} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 // Import screens
@@ -33,8 +33,8 @@ const Tab = createBottomTabNavigator();
 function MainTabNavigator() {
   return (
     <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
+      screenOptions={({route}) => ({
+        tabBarIcon: ({focused, color, size}) => {
           let iconName;
 
           if (route.name === 'Home') {
@@ -54,8 +54,7 @@ function MainTabNavigator() {
         tabBarActiveTintColor: '#D4AF37',
         tabBarInactiveTintColor: 'gray',
         headerShown: false,
-      })}
-    >
+      })}>
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Categories" component={CategoryScreen} />
       <Tab.Screen name="Wishlist" component={WishlistScreen} />
@@ -69,7 +68,9 @@ const App = () => {
   return (
     <NavigationContainer>
       <StatusBar backgroundColor="#FFF" barStyle="dark-content" />
-      <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>
+      <Stack.Navigator
+        initialRouteName="Splash"
+        screenOptions={{headerShown: false}}>
         <Stack.Screen name="Splash" component={SplashScreen} />
         <Stack.Screen name="Onboarding" component={OnboardingScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
@@ -77,7 +78,10 @@ const App = () => {
         <Stack.Screen name="Main" component={MainTabNavigator} />
         <Stack.Screen name="ProductDetails" component={ProductDetailsScreen} />
         <Stack.Screen name="Checkout" component={CheckoutScreen} />
-        <Stack.Screen name="OrderConfirmation" component={OrderConfirmationScreen} />
+        <Stack.Screen
+          name="OrderConfirmation"
+          component={OrderConfirmationScreen}
+        />
         <Stack.Screen name="Coupons" component={CouponScreen} />
         <Stack.Screen name="Orders" component={OrdersScreen} />
         <Stack.Screen name="Addresses" component={AddressesScreen} />

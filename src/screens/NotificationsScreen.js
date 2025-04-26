@@ -1,8 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  FlatList,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const NotificationsScreen = ({ navigation }) => {
+const NotificationsScreen = ({navigation}) => {
   // Sample notification data - replace with your actual data
   const notifications = [
     {
@@ -12,7 +19,7 @@ const NotificationsScreen = ({ navigation }) => {
       message: 'Your order #ORD-2023-001 has been shipped',
       time: '2 hours ago',
       read: false,
-      icon: 'cube-outline'
+      icon: 'cube-outline',
     },
     {
       id: '2',
@@ -21,7 +28,7 @@ const NotificationsScreen = ({ navigation }) => {
       message: 'Get 30% off on diamond jewelry this weekend',
       time: '1 day ago',
       read: true,
-      icon: 'pricetag-outline'
+      icon: 'pricetag-outline',
     },
     {
       id: '3',
@@ -30,24 +37,24 @@ const NotificationsScreen = ({ navigation }) => {
       message: 'New login detected from your account',
       time: '3 days ago',
       read: true,
-      icon: 'shield-checkmark-outline'
+      icon: 'shield-checkmark-outline',
     },
   ];
 
-  const renderNotificationItem = ({ item }) => (
-    <TouchableOpacity 
+  const renderNotificationItem = ({item}) => (
+    <TouchableOpacity
       style={[styles.notificationCard, !item.read && styles.unreadNotification]}
-      onPress={() => markAsRead(item.id)}
-    >
+      onPress={() => markAsRead(item.id)}>
       <View style={styles.notificationIcon}>
-        <Icon 
-          name={item.icon} 
-          size={24} 
-          color={item.read ? '#888' : '#D4AF37'} 
+        <Icon
+          name={item.icon}
+          size={24}
+          color={item.read ? '#888' : '#D4AF37'}
         />
       </View>
       <View style={styles.notificationContent}>
-        <Text style={[styles.notificationTitle, !item.read && styles.unreadText]}>
+        <Text
+          style={[styles.notificationTitle, !item.read && styles.unreadText]}>
           {item.title}
         </Text>
         <Text style={styles.notificationMessage}>{item.message}</Text>
@@ -57,7 +64,7 @@ const NotificationsScreen = ({ navigation }) => {
     </TouchableOpacity>
   );
 
-  const markAsRead = (id) => {
+  const markAsRead = id => {
     // Implement your mark as read logic here
     console.log(`Marking notification ${id} as read`);
   };
@@ -70,18 +77,17 @@ const NotificationsScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={styles.backButton}>
           <Icon name="arrow-back" size={24} color="#333" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Notifications</Text>
-        <TouchableOpacity 
-          style={styles.markAllButton}
-          onPress={markAllAsRead}
-        >
+        <TouchableOpacity style={styles.markAllButton} onPress={markAllAsRead}>
           <Text style={styles.markAllText}>Mark all as read</Text>
         </TouchableOpacity>
       </View>
-      
+
       {notifications.length > 0 ? (
         <FlatList
           data={notifications}
@@ -94,7 +100,9 @@ const NotificationsScreen = ({ navigation }) => {
         <View style={styles.emptyContainer}>
           <Icon name="notifications-off-outline" size={60} color="#D4AF37" />
           <Text style={styles.emptyTitle}>No Notifications</Text>
-          <Text style={styles.emptyText}>You don't have any notifications yet</Text>
+          <Text style={styles.emptyText}>
+            You don't have any notifications yet
+          </Text>
         </View>
       )}
     </View>
@@ -143,7 +151,7 @@ const styles = StyleSheet.create({
     padding: 15,
     marginTop: 10,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 2,

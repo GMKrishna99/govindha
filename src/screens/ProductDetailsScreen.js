@@ -1,23 +1,31 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, Dimensions } from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const { width } = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 
-const ProductDetailsScreen = ({ route, navigation }) => {
-  const { product } = route.params;
+const ProductDetailsScreen = ({route, navigation}) => {
+  const {product} = route.params;
   const [selectedSize, setSelectedSize] = useState('Small');
   const [quantity, setQuantity] = useState(1);
   const [favorite, setFavorite] = useState(product.isFavorite);
-  
+
   const sizes = ['Small', 'Medium', 'Large'];
-  
+
   const productImages = [
     product.image,
     'https://www.giva.co/cdn/shop/files/AVNP009_5.jpg?v=1723123861&width=713',
     'https://www.giva.co/cdn/shop/files/AVNP009_2.jpg?v=1723123861&width=713',
   ];
-  
+
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   const decreaseQuantity = () => {
@@ -37,16 +45,14 @@ const ProductDetailsScreen = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.backButton}
-          onPress={() => navigation.goBack()}
-        >
+          onPress={() => navigation.goBack()}>
           <Icon name="arrow-back" size={24} color="#333" />
         </TouchableOpacity>
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.favoriteButton}
-          onPress={() => setFavorite(!favorite)}
-        >
+          onPress={() => setFavorite(!favorite)}>
           <Icon
             name={favorite ? 'heart' : 'heart-outline'}
             size={24}
@@ -60,16 +66,19 @@ const ProductDetailsScreen = ({ route, navigation }) => {
           horizontal
           pagingEnabled
           showsHorizontalScrollIndicator={false}
-          onMomentumScrollEnd={(event) => {
+          onMomentumScrollEnd={event => {
             const slideIndex = Math.round(
-              event.nativeEvent.contentOffset.x / width
+              event.nativeEvent.contentOffset.x / width,
             );
             setActiveImageIndex(slideIndex);
-          }}
-        >
+          }}>
           {productImages.map((image, index) => (
             <View key={index} style={styles.imageContainer}>
-              <Image source={{uri:image}} style={styles.productImage} resizeMode="cover"/>
+              <Image
+                source={{uri: image}}
+                style={styles.productImage}
+                resizeMode="cover"
+              />
             </View>
           ))}
         </ScrollView>
@@ -80,7 +89,10 @@ const ProductDetailsScreen = ({ route, navigation }) => {
               key={index}
               style={[
                 styles.paginationDot,
-                { backgroundColor: index === activeImageIndex ? '#D4AF37' : '#CCCCCC' },
+                {
+                  backgroundColor:
+                    index === activeImageIndex ? '#D4AF37' : '#CCCCCC',
+                },
               ]}
             />
           ))}
@@ -89,62 +101,62 @@ const ProductDetailsScreen = ({ route, navigation }) => {
         <View style={styles.detailsContainer}>
           <Text style={styles.productName}>{product.name}</Text>
           <Text style={styles.productPrice}>{product.price}</Text>
-          
+
           <Text style={styles.sectionTitle}>Description</Text>
           <Text style={styles.description}>
-            This stunning piece features exquisite craftsmanship and premium materials. Perfect for special occasions or as an everyday luxury piece.
+            This stunning piece features exquisite craftsmanship and premium
+            materials. Perfect for special occasions or as an everyday luxury
+            piece.
           </Text>
-          
+
           <Text style={styles.sectionTitle}>Size</Text>
           <View style={styles.sizesContainer}>
-            {sizes.map((size) => (
+            {sizes.map(size => (
               <TouchableOpacity
                 key={size}
                 style={[
                   styles.sizeButton,
-                  { borderColor: selectedSize === size ? '#D4AF37' : '#DDD' },
+                  {borderColor: selectedSize === size ? '#D4AF37' : '#DDD'},
                 ]}
-                onPress={() => setSelectedSize(size)}
-              >
+                onPress={() => setSelectedSize(size)}>
                 <Text
                   style={[
                     styles.sizeText,
-                    { color: selectedSize === size ? '#D4AF37' : '#888' },
-                  ]}
-                >
+                    {color: selectedSize === size ? '#D4AF37' : '#888'},
+                  ]}>
                   {size}
                 </Text>
               </TouchableOpacity>
             ))}
           </View>
-          
+
           <Text style={styles.sectionTitle}>Quantity</Text>
           <View style={styles.quantityContainer}>
-            <TouchableOpacity 
+            <TouchableOpacity
               style={styles.quantityButton}
-              onPress={decreaseQuantity}
-            >
+              onPress={decreaseQuantity}>
               <Icon name="remove" size={20} color="#333" />
             </TouchableOpacity>
             <Text style={styles.quantityText}>{quantity}</Text>
-            <TouchableOpacity 
+            <TouchableOpacity
               style={styles.quantityButton}
-              onPress={increaseQuantity}
-            >
+              onPress={increaseQuantity}>
               <Icon name="add" size={20} color="#333" />
             </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
-      
+
       <View style={styles.footer}>
-        <View style={styles.priceContainer}> 
+        <View style={styles.priceContainer}>
           <Text style={styles.totalText}>Total:</Text>
           <Text style={styles.totalPrice}>
             ${(parseInt(product.price.substring(1)) * quantity).toFixed(2)}
           </Text>
         </View>
-        <TouchableOpacity style={styles.addToCartButton} onPress={handleAddToCart}>
+        <TouchableOpacity
+          style={styles.addToCartButton}
+          onPress={handleAddToCart}>
           <Text style={styles.addToCartText}>Add to Cart</Text>
         </TouchableOpacity>
       </View>

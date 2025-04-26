@@ -1,7 +1,15 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  ScrollView,
+} from 'react-native';
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -11,7 +19,9 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
+    <ScrollView
+      contentContainerStyle={styles.container}
+      showsVerticalScrollIndicator={false}>
       <View style={styles.logoContainer}>
         <Image
           source={require('../assets/images/logo1.png')}
@@ -19,10 +29,10 @@ const LoginScreen = ({ navigation }) => {
           resizeMode="contain"
         />
       </View>
-      
+
       <Text style={styles.title}>Welcome Back</Text>
       <Text style={styles.subtitle}>Sign in to continue</Text>
-      
+
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Email</Text>
         <TextInput
@@ -34,7 +44,7 @@ const LoginScreen = ({ navigation }) => {
           autoCapitalize="none"
         />
       </View>
-      
+
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Password</Text>
         <TextInput
@@ -45,21 +55,21 @@ const LoginScreen = ({ navigation }) => {
           secureTextEntry
         />
       </View>
-      
+
       <TouchableOpacity style={styles.forgotPassword}>
         <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
       </TouchableOpacity>
-      
+
       <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
         <Text style={styles.loginButtonText}>Login</Text>
       </TouchableOpacity>
-      
+
       {/* <View style={styles.divider}>
         <View style={styles.line} />
         <Text style={styles.orText}>OR</Text>
         <View style={styles.line} />
       </View> */}
-      
+
       {/* <View style={styles.socialContainer}>
         <TouchableOpacity style={styles.socialButton}>
           <Text style={styles.socialButtonText}>Google</Text>
@@ -69,10 +79,10 @@ const LoginScreen = ({ navigation }) => {
           <Text style={styles.socialButtonText}>Facebook</Text>
         </TouchableOpacity>
       </View> */}
-      
+
       <View style={styles.signupContainer}>
         <Text style={styles.signupText}>Don't have an account? </Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Register')}>
           <Text style={styles.signupLink}>Sign Up</Text>
         </TouchableOpacity>
       </View>

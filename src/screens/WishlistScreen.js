@@ -1,49 +1,60 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const WishlistScreen = ({ navigation }) => {
+const WishlistScreen = ({navigation}) => {
   const [wishlistItems, setWishlistItems] = React.useState([
-    { 
-      id: '2', 
-      name: 'Gold Ring', 
-      price: '$599', 
-      image: 'https://www.gehnaindia.com/_next/image?url=https%3A%2F%2Fcdn-images.gehnaindia.com%2Fproducts%2Fwebsite_picture3s%2F000%2F014%2F547%2Foriginal%2FGHDICSRG-6039_3.jpg%3F1696492216&w=3840&q=75',
+    {
+      id: '2',
+      name: 'Gold Ring',
+      price: '$599',
+      image:
+        'https://www.gehnaindia.com/_next/image?url=https%3A%2F%2Fcdn-images.gehnaindia.com%2Fproducts%2Fwebsite_picture3s%2F000%2F014%2F547%2Foriginal%2FGHDICSRG-6039_3.jpg%3F1696492216&w=3840&q=75',
     },
-    { 
-      id: '5', 
-      name: 'Earrings', 
-      price: '$499', 
-      image: 'https://www.sasitrends.com/cdn/shop/products/Matt-Gold-Plated-AD-Peaock-Pearl-Earrings.jpg?v=1690802666&width=1080',
+    {
+      id: '5',
+      name: 'Earrings',
+      price: '$499',
+      image:
+        'https://www.sasitrends.com/cdn/shop/products/Matt-Gold-Plated-AD-Peaock-Pearl-Earrings.jpg?v=1690802666&width=1080',
     },
   ]);
 
-  const removeFromWishlist = (id) => {
+  const removeFromWishlist = id => {
     setWishlistItems(wishlistItems.filter(item => item.id !== id));
   };
 
-  const renderWishlistItem = ({ item }) => (
+  const renderWishlistItem = ({item}) => (
     <View style={styles.wishlistItem}>
       <View style={styles.productInfo}>
-        <Image source={{uri:item.image}} style={styles.productImage} resizeMode="cover" />
+        <Image
+          source={{uri: item.image}}
+          style={styles.productImage}
+          resizeMode="cover"
+        />
         <View style={styles.productDetails}>
           <Text style={styles.productName}>{item.name}</Text>
           <Text style={styles.productPrice}>{item.price}</Text>
         </View>
       </View>
-      
+
       <View style={styles.actionButtons}>
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.addToCartButton}
-          onPress={() => navigation.navigate('Cart')}
-        >
+          onPress={() => navigation.navigate('Cart')}>
           <Icon name="cart-outline" size={20} color="#FFF" />
         </TouchableOpacity>
-        
-        <TouchableOpacity 
+
+        <TouchableOpacity
           style={styles.removeButton}
-          onPress={() => removeFromWishlist(item.id)}
-        >
+          onPress={() => removeFromWishlist(item.id)}>
           <Icon name="trash-outline" size={20} color="#888" />
         </TouchableOpacity>
       </View>
@@ -67,10 +78,9 @@ const WishlistScreen = ({ navigation }) => {
         <View style={styles.emptyWishlistContainer}>
           <Icon name="heart-outline" size={80} color="#DDD" />
           <Text style={styles.emptyWishlistText}>Your wishlist is empty</Text>
-          <TouchableOpacity 
+          <TouchableOpacity
             style={styles.exploreBrowseButton}
-            onPress={() => navigation.navigate('Home')}
-          >
+            onPress={() => navigation.navigate('Home')}>
             <Text style={styles.exploreBrowseText}>Explore Products</Text>
           </TouchableOpacity>
         </View>

@@ -1,8 +1,16 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
+import {FlatList} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const OrdersScreen = ({ navigation }) => {
+const OrdersScreen = ({navigation}) => {
   // Sample order data - replace with your actual data
   const orders = [
     {
@@ -11,10 +19,21 @@ const OrdersScreen = ({ navigation }) => {
       date: 'Oct 15, 2023',
       status: 'Delivered',
       items: [
-        { id: '1', name: 'Diamond Pendant', price: '$899', image: 'https://manubhai.in/SocialMedia/post_artworks/AE05136.jpg' },
-        { id: '2', name: 'Gold Ring', price: '$599', image: 'https://www.caratlane.com/blog/wp-content/uploads/2023/10/2B-14.jpg' },
+        {
+          id: '1',
+          name: 'Diamond Pendant',
+          price: '$899',
+          image: 'https://manubhai.in/SocialMedia/post_artworks/AE05136.jpg',
+        },
+        {
+          id: '2',
+          name: 'Gold Ring',
+          price: '$599',
+          image:
+            'https://www.caratlane.com/blog/wp-content/uploads/2023/10/2B-14.jpg',
+        },
       ],
-      total: '$1498'
+      total: '$1498',
     },
     {
       id: '2',
@@ -22,31 +41,39 @@ const OrdersScreen = ({ navigation }) => {
       date: 'Nov 2, 2023',
       status: 'Shipped',
       items: [
-        { id: '3', name: 'Pearl Necklace', price: '$799', image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=400' },
+        {
+          id: '3',
+          name: 'Pearl Necklace',
+          price: '$799',
+          image:
+            'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=400',
+        },
       ],
-      total: '$799'
-    }
+      total: '$799',
+    },
   ];
 
-  const renderOrderItem = ({ item }) => (
-    <TouchableOpacity 
+  const renderOrderItem = ({item}) => (
+    <TouchableOpacity
       style={styles.orderCard}
-      onPress={() => navigation.navigate('OrderDetails', { order: item })}
-    >
+      onPress={() => navigation.navigate('OrderDetails', {order: item})}>
       <View style={styles.orderHeader}>
         <Text style={styles.orderNumber}>{item.orderNumber}</Text>
-        <Text style={[styles.orderStatus, 
-          { color: item.status === 'Delivered' ? '#4CAF50' : '#FFA000' }]}>
+        <Text
+          style={[
+            styles.orderStatus,
+            {color: item.status === 'Delivered' ? '#4CAF50' : '#FFA000'},
+          ]}>
           {item.status}
         </Text>
       </View>
-      
+
       <Text style={styles.orderDate}>{item.date}</Text>
-      
+
       <View style={styles.orderItems}>
         {item.items.map(product => (
           <View key={product.id} style={styles.productContainer}>
-            <Image source={{ uri: product.image }} style={styles.productImage} />
+            <Image source={{uri: product.image}} style={styles.productImage} />
             <View style={styles.productInfo}>
               <Text style={styles.productName}>{product.name}</Text>
               <Text style={styles.productPrice}>{product.price}</Text>
@@ -54,7 +81,7 @@ const OrdersScreen = ({ navigation }) => {
           </View>
         ))}
       </View>
-      
+
       <View style={styles.orderFooter}>
         <Text style={styles.totalText}>Total: {item.total}</Text>
         <TouchableOpacity style={styles.trackButton}>
@@ -69,13 +96,15 @@ const OrdersScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={styles.backButton}>
           <Icon name="arrow-back" size={24} color="#333" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>My Orders</Text>
         <View style={styles.headerIconPlaceholder} />
       </View>
-      
+
       {orders.length > 0 ? (
         <FlatList
           data={orders}
@@ -88,11 +117,12 @@ const OrdersScreen = ({ navigation }) => {
         <View style={styles.emptyContainer}>
           <Icon name="receipt-outline" size={60} color="#D4AF37" />
           <Text style={styles.emptyTitle}>No Orders Yet</Text>
-          <Text style={styles.emptyText}>You haven't placed any orders yet</Text>
-          <TouchableOpacity 
+          <Text style={styles.emptyText}>
+            You haven't placed any orders yet
+          </Text>
+          <TouchableOpacity
             style={styles.shopButton}
-            onPress={() => navigation.navigate('Home')}
-          >
+            onPress={() => navigation.navigate('Home')}>
             <Text style={styles.shopButtonText}>Start Shopping</Text>
           </TouchableOpacity>
         </View>
@@ -137,7 +167,7 @@ const styles = StyleSheet.create({
     padding: 15,
     marginTop: 15,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 2,

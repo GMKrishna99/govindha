@@ -1,29 +1,36 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput } from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  TextInput,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const CheckoutScreen = ({ navigation }) => {
+const CheckoutScreen = ({navigation}) => {
   const [activeStep, setActiveStep] = useState('shipping');
   const [shippingMethod, setShippingMethod] = useState('standard');
   const [paymentMethod, setPaymentMethod] = useState('card');
 
   const cartItems = [
-    { 
-      id: '1', 
-      name: 'Diamond Pendant', 
-      price: 899, 
-      quantity: 1
+    {
+      id: '1',
+      name: 'Diamond Pendant',
+      price: 899,
+      quantity: 1,
     },
-    { 
-      id: '2', 
-      name: 'Gold Ring', 
-      price: 599, 
-      quantity: 2
+    {
+      id: '2',
+      name: 'Gold Ring',
+      price: 599,
+      quantity: 2,
     },
   ];
 
   const getSubtotal = () => {
-    return cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    return cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   };
 
   const handlePlaceOrder = () => {
@@ -33,59 +40,58 @@ const CheckoutScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.backButton}
-          onPress={() => navigation.goBack()}
-        >
+          onPress={() => navigation.goBack()}>
           <Icon name="arrow-back" size={24} color="#333" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Checkout</Text>
-        <View style={{ width: 40 }} />
+        <View style={{width: 40}} />
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.stepsContainer}>
-          <TouchableOpacity 
+          <TouchableOpacity
             style={[
-              styles.stepButton, 
-              activeStep === 'shipping' && styles.activeStep
+              styles.stepButton,
+              activeStep === 'shipping' && styles.activeStep,
             ]}
-            onPress={() => setActiveStep('shipping')}
-          >
-            <Text style={[
-              styles.stepText,
-              activeStep === 'shipping' && styles.activeStepText
-            ]}>
+            onPress={() => setActiveStep('shipping')}>
+            <Text
+              style={[
+                styles.stepText,
+                activeStep === 'shipping' && styles.activeStepText,
+              ]}>
               Shipping
             </Text>
           </TouchableOpacity>
           <View style={styles.stepDivider} />
-          <TouchableOpacity 
+          <TouchableOpacity
             style={[
-              styles.stepButton, 
-              activeStep === 'payment' && styles.activeStep
+              styles.stepButton,
+              activeStep === 'payment' && styles.activeStep,
             ]}
-            onPress={() => setActiveStep('payment')}
-          >
-            <Text style={[
-              styles.stepText,
-              activeStep === 'payment' && styles.activeStepText
-            ]}>
+            onPress={() => setActiveStep('payment')}>
+            <Text
+              style={[
+                styles.stepText,
+                activeStep === 'payment' && styles.activeStepText,
+              ]}>
               Payment
             </Text>
           </TouchableOpacity>
           <View style={styles.stepDivider} />
-          <TouchableOpacity 
+          <TouchableOpacity
             style={[
-              styles.stepButton, 
-              activeStep === 'review' && styles.activeStep
+              styles.stepButton,
+              activeStep === 'review' && styles.activeStep,
             ]}
-            onPress={() => setActiveStep('review')}
-          >
-            <Text style={[
-              styles.stepText,
-              activeStep === 'review' && styles.activeStepText
-            ]}>
+            onPress={() => setActiveStep('review')}>
+            <Text
+              style={[
+                styles.stepText,
+                activeStep === 'review' && styles.activeStepText,
+              ]}>
               Review
             </Text>
           </TouchableOpacity>
@@ -94,7 +100,7 @@ const CheckoutScreen = ({ navigation }) => {
         {activeStep === 'shipping' && (
           <View style={styles.sectionContainer}>
             <Text style={styles.sectionTitle}>Shipping Address</Text>
-            
+
             <View style={styles.addressCard}>
               <View style={styles.addressHeader}>
                 <Text style={styles.addressType}>Home</Text>
@@ -103,77 +109,80 @@ const CheckoutScreen = ({ navigation }) => {
                 </TouchableOpacity>
               </View>
               <Text style={styles.addressName}>Emily Johnson</Text>
-              <Text style={styles.addressDetails}>
-                123 Main Street, Apt 4B
-              </Text>
-              <Text style={styles.addressDetails}>
-                New York, NY 10001
-              </Text>
-              <Text style={styles.addressDetails}>
-                United States
-              </Text>
+              <Text style={styles.addressDetails}>123 Main Street, Apt 4B</Text>
+              <Text style={styles.addressDetails}>New York, NY 10001</Text>
+              <Text style={styles.addressDetails}>United States</Text>
               <Text style={styles.addressPhone}>+1 (555) 123-4567</Text>
             </View>
-            
+
             <TouchableOpacity style={styles.addAddressButton}>
               <Icon name="add" size={24} color="#D4AF37" />
               <Text style={styles.addAddressText}>Add New Address</Text>
             </TouchableOpacity>
 
-            <Text style={[styles.sectionTitle, { marginTop: 20 }]}>Shipping Method</Text>
-            
-            <TouchableOpacity 
+            <Text style={[styles.sectionTitle, {marginTop: 20}]}>
+              Shipping Method
+            </Text>
+
+            <TouchableOpacity
               style={[
                 styles.shippingMethodCard,
-                shippingMethod === 'standard' && styles.selectedCard
+                shippingMethod === 'standard' && styles.selectedCard,
               ]}
-              onPress={() => setShippingMethod('standard')}
-            >
+              onPress={() => setShippingMethod('standard')}>
               <View style={styles.shippingMethodLeft}>
-                <View style={[
-                  styles.radioButton,
-                  shippingMethod === 'standard' && styles.radioButtonSelected
-                ]}>
+                <View
+                  style={[
+                    styles.radioButton,
+                    shippingMethod === 'standard' && styles.radioButtonSelected,
+                  ]}>
                   {shippingMethod === 'standard' && (
                     <View style={styles.radioButtonInner} />
                   )}
                 </View>
                 <View>
-                  <Text style={styles.shippingMethodTitle}>Standard Shipping</Text>
-                  <Text style={styles.shippingMethodSubtitle}>3-5 Business Days</Text>
+                  <Text style={styles.shippingMethodTitle}>
+                    Standard Shipping
+                  </Text>
+                  <Text style={styles.shippingMethodSubtitle}>
+                    3-5 Business Days
+                  </Text>
                 </View>
               </View>
               <Text style={styles.shippingMethodPrice}>$10.00</Text>
             </TouchableOpacity>
-            
-            <TouchableOpacity 
+
+            <TouchableOpacity
               style={[
                 styles.shippingMethodCard,
-                shippingMethod === 'express' && styles.selectedCard
+                shippingMethod === 'express' && styles.selectedCard,
               ]}
-              onPress={() => setShippingMethod('express')}
-            >
+              onPress={() => setShippingMethod('express')}>
               <View style={styles.shippingMethodLeft}>
-                <View style={[
-                  styles.radioButton,
-                  shippingMethod === 'express' && styles.radioButtonSelected
-                ]}>
+                <View
+                  style={[
+                    styles.radioButton,
+                    shippingMethod === 'express' && styles.radioButtonSelected,
+                  ]}>
                   {shippingMethod === 'express' && (
                     <View style={styles.radioButtonInner} />
                   )}
                 </View>
                 <View>
-                  <Text style={styles.shippingMethodTitle}>Express Shipping</Text>
-                  <Text style={styles.shippingMethodSubtitle}>1-2 Business Days</Text>
+                  <Text style={styles.shippingMethodTitle}>
+                    Express Shipping
+                  </Text>
+                  <Text style={styles.shippingMethodSubtitle}>
+                    1-2 Business Days
+                  </Text>
                 </View>
               </View>
               <Text style={styles.shippingMethodPrice}>$25.00</Text>
             </TouchableOpacity>
-            
-            <TouchableOpacity 
+
+            <TouchableOpacity
               style={styles.continueButton}
-              onPress={() => setActiveStep('payment')}
-            >
+              onPress={() => setActiveStep('payment')}>
               <Text style={styles.continueButtonText}>Continue to Payment</Text>
             </TouchableOpacity>
           </View>
@@ -182,19 +191,19 @@ const CheckoutScreen = ({ navigation }) => {
         {activeStep === 'payment' && (
           <View style={styles.sectionContainer}>
             <Text style={styles.sectionTitle}>Payment Method</Text>
-            
-            <TouchableOpacity 
+
+            <TouchableOpacity
               style={[
                 styles.paymentMethodCard,
-                paymentMethod === 'card' && styles.selectedCard
+                paymentMethod === 'card' && styles.selectedCard,
               ]}
-              onPress={() => setPaymentMethod('card')}
-            >
+              onPress={() => setPaymentMethod('card')}>
               <View style={styles.paymentMethodLeft}>
-                <View style={[
-                  styles.radioButton,
-                  paymentMethod === 'card' && styles.radioButtonSelected
-                ]}>
+                <View
+                  style={[
+                    styles.radioButton,
+                    paymentMethod === 'card' && styles.radioButtonSelected,
+                  ]}>
                   {paymentMethod === 'card' && (
                     <View style={styles.radioButtonInner} />
                   )}
@@ -217,9 +226,10 @@ const CheckoutScreen = ({ navigation }) => {
                     keyboardType="numeric"
                   />
                 </View>
-                
+
                 <View style={styles.inputRow}>
-                  <View style={[styles.inputContainer, { flex: 1, marginRight: 10 }]}>
+                  <View
+                    style={[styles.inputContainer, {flex: 1, marginRight: 10}]}>
                     <Text style={styles.inputLabel}>Expiry Date</Text>
                     <TextInput
                       style={styles.input}
@@ -227,7 +237,7 @@ const CheckoutScreen = ({ navigation }) => {
                       keyboardType="numeric"
                     />
                   </View>
-                  <View style={[styles.inputContainer, { flex: 1 }]}>
+                  <View style={[styles.inputContainer, {flex: 1}]}>
                     <Text style={styles.inputLabel}>CVV</Text>
                     <TextInput
                       style={styles.input}
@@ -236,29 +246,26 @@ const CheckoutScreen = ({ navigation }) => {
                     />
                   </View>
                 </View>
-                
+
                 <View style={styles.inputContainer}>
                   <Text style={styles.inputLabel}>Name on Card</Text>
-                  <TextInput
-                    style={styles.input}
-                    placeholder="John Doe"
-                  />
+                  <TextInput style={styles.input} placeholder="John Doe" />
                 </View>
               </View>
             )}
-            
-            <TouchableOpacity 
+
+            <TouchableOpacity
               style={[
                 styles.paymentMethodCard,
-                paymentMethod === 'paypal' && styles.selectedCard
+                paymentMethod === 'paypal' && styles.selectedCard,
               ]}
-              onPress={() => setPaymentMethod('paypal')}
-            >
+              onPress={() => setPaymentMethod('paypal')}>
               <View style={styles.paymentMethodLeft}>
-                <View style={[
-                  styles.radioButton,
-                  paymentMethod === 'paypal' && styles.radioButtonSelected
-                ]}>
+                <View
+                  style={[
+                    styles.radioButton,
+                    paymentMethod === 'paypal' && styles.radioButtonSelected,
+                  ]}>
                   {paymentMethod === 'paypal' && (
                     <View style={styles.radioButtonInner} />
                   )}
@@ -270,11 +277,10 @@ const CheckoutScreen = ({ navigation }) => {
               </View>
               <Icon name="chevron-forward" size={20} color="#888" />
             </TouchableOpacity>
-            
-            <TouchableOpacity 
+
+            <TouchableOpacity
               style={styles.continueButton}
-              onPress={() => setActiveStep('review')}
-            >
+              onPress={() => setActiveStep('review')}>
               <Text style={styles.continueButtonText}>Continue to Review</Text>
             </TouchableOpacity>
           </View>
@@ -283,7 +289,7 @@ const CheckoutScreen = ({ navigation }) => {
         {activeStep === 'review' && (
           <View style={styles.sectionContainer}>
             <Text style={styles.sectionTitle}>Order Summary</Text>
-            
+
             {cartItems.map(item => (
               <View key={item.id} style={styles.orderItem}>
                 <Text style={styles.orderItemName}>
@@ -294,53 +300,57 @@ const CheckoutScreen = ({ navigation }) => {
                 </Text>
               </View>
             ))}
-            
+
             <View style={styles.divider} />
-            
+
             <View style={styles.summaryRow}>
               <Text style={styles.summaryText}>Subtotal</Text>
               <Text style={styles.summaryValue}>${getSubtotal()}</Text>
             </View>
-            
+
             <View style={styles.summaryRow}>
               <Text style={styles.summaryText}>Shipping</Text>
               <Text style={styles.summaryValue}>
                 ${shippingMethod === 'standard' ? '10.00' : '25.00'}
               </Text>
             </View>
-            
+
             <View style={styles.summaryRow}>
               <Text style={styles.summaryText}>Tax</Text>
               <Text style={styles.summaryValue}>$20.00</Text>
             </View>
-            
+
             <View style={styles.divider} />
-            
+
             <View style={styles.summaryRow}>
               <Text style={styles.totalText}>Total</Text>
               <Text style={styles.totalValue}>
-                ${getSubtotal() + (shippingMethod === 'standard' ? 10 : 25) + 20}
+                $
+                {getSubtotal() + (shippingMethod === 'standard' ? 10 : 25) + 20}
               </Text>
             </View>
-            
+
             <View style={styles.addressSummary}>
               <Text style={styles.summaryLabel}>Shipping Address:</Text>
               <Text style={styles.summaryAddressText}>Emily Johnson</Text>
-              <Text style={styles.summaryAddressText}>123 Main Street, Apt 4B</Text>
+              <Text style={styles.summaryAddressText}>
+                123 Main Street, Apt 4B
+              </Text>
               <Text style={styles.summaryAddressText}>New York, NY 10001</Text>
             </View>
-            
+
             <View style={styles.paymentSummary}>
               <Text style={styles.summaryLabel}>Payment Method:</Text>
               <Text style={styles.summaryPaymentText}>
-                {paymentMethod === 'card' ? 'Credit/Debit Card ending in 3456' : 'PayPal'}
+                {paymentMethod === 'card'
+                  ? 'Credit/Debit Card ending in 3456'
+                  : 'PayPal'}
               </Text>
             </View>
-            
-            <TouchableOpacity 
+
+            <TouchableOpacity
               style={styles.placeOrderButton}
-              onPress={handlePlaceOrder}
-            >
+              onPress={handlePlaceOrder}>
               <Text style={styles.placeOrderButtonText}>Place Order</Text>
             </TouchableOpacity>
           </View>

@@ -1,88 +1,122 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, FlatList } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  FlatList,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({navigation}) => {
   const categories = [
-    { id: '1', name: 'Rings', icon: 'https://www.giva.co/cdn/shop/collections/pink_rings_c356f6b3-6547-4e39-9b08-dfdf5ecfc2b0.jpg?v=1742651416' },
-    { id: '2', name: 'Necklaces', icon: 'https://www.giva.co/cdn/shop/collections/sets_pink.webp?v=1742651410' },
-    { id: '3', name: 'Earrings', icon: 'https://www.giva.co/cdn/shop/collections/earrings_pink-min.png?v=1742651478' },
-    { id: '4', name: 'Bracelets', icon: 'https://www.giva.co/cdn/shop/collections/pink_br-min.png?v=1742651417' },
+    {
+      id: '1',
+      name: 'Rings',
+      icon: 'https://www.giva.co/cdn/shop/collections/pink_rings_c356f6b3-6547-4e39-9b08-dfdf5ecfc2b0.jpg?v=1742651416',
+    },
+    {
+      id: '2',
+      name: 'Necklaces',
+      icon: 'https://www.giva.co/cdn/shop/collections/sets_pink.webp?v=1742651410',
+    },
+    {
+      id: '3',
+      name: 'Earrings',
+      icon: 'https://www.giva.co/cdn/shop/collections/earrings_pink-min.png?v=1742651478',
+    },
+    {
+      id: '4',
+      name: 'Bracelets',
+      icon: 'https://www.giva.co/cdn/shop/collections/pink_br-min.png?v=1742651417',
+    },
   ];
 
   const featuredProducts = [
-    { 
-      id: '1', 
-      name: 'Diamond Pendant', 
-      price: '$899', 
+    {
+      id: '1',
+      name: 'Diamond Pendant',
+      price: '$899',
       image: 'https://manubhai.in/SocialMedia/post_artworks/AE05136.jpg',
-      isFavorite: false 
+      isFavorite: false,
     },
-    { 
-      id: '2', 
-      name: 'Gold Ring', 
-      price: '$599', 
-      image: 'https://www.caratlane.com/blog/wp-content/uploads/2023/10/2B-14.jpg',
-      isFavorite: true 
+    {
+      id: '2',
+      name: 'Gold Ring',
+      price: '$599',
+      image:
+        'https://www.caratlane.com/blog/wp-content/uploads/2023/10/2B-14.jpg',
+      isFavorite: true,
     },
-    { 
-      id: '3', 
-      name: 'Pearl Necklace', 
-      price: '$799', 
-      image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=400',
-      isFavorite: false 
+    {
+      id: '3',
+      name: 'Pearl Necklace',
+      price: '$799',
+      image:
+        'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=400',
+      isFavorite: false,
     },
   ];
 
   const newArrivals = [
-    { 
-      id: '4', 
-      name: 'Silver Bracelet', 
-      price: '$299', 
-      image: 'https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=400',
-      isFavorite: false 
+    {
+      id: '4',
+      name: 'Silver Bracelet',
+      price: '$299',
+      image:
+        'https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=400',
+      isFavorite: false,
     },
-    { 
-      id: '5', 
-      name: 'Ruby Earrings', 
-      price: '$499', 
-      image: 'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=400',
-      isFavorite: true 
+    {
+      id: '5',
+      name: 'Ruby Earrings',
+      price: '$499',
+      image:
+        'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=400',
+      isFavorite: true,
     },
-    { 
-      id: '6', 
-      name: 'Sapphire Ring', 
-      price: '$699', 
-      image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=400',
-      isFavorite: false 
+    {
+      id: '6',
+      name: 'Sapphire Ring',
+      price: '$699',
+      image:
+        'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=400',
+      isFavorite: false,
     },
   ];
 
-  const renderCategoryItem = ({ item }) => (
-    <TouchableOpacity 
+  const renderCategoryItem = ({item}) => (
+    <TouchableOpacity
       style={styles.categoryItem}
-      onPress={() => navigation.navigate('Categories', { category: item })}
-    >
+      onPress={() => navigation.navigate('Categories', {category: item})}>
       <View style={styles.categoryIconContainer}>
-        <Image source={{uri:item.icon}} style={{height:'100%',width:'100%'}}/>
+        <Image
+          source={{uri: item.icon}}
+          style={{height: '100%', width: '100%'}}
+        />
         {/* <Icon name={item.icon} size={24} color="#D4AF37" /> */}
       </View>
       <Text style={styles.categoryName}>{item.name}</Text>
     </TouchableOpacity>
   );
 
-  const renderProductItem = ({ item }) => (
-    <TouchableOpacity 
+  const renderProductItem = ({item}) => (
+    <TouchableOpacity
       style={styles.productItem}
-      onPress={() => navigation.navigate('ProductDetails', { product: item })}
-    >
+      onPress={() => navigation.navigate('ProductDetails', {product: item})}>
       <View style={styles.productImageContainer}>
-        <Image source={{uri :item.image}} style={styles.productImage} resizeMode="cover" />
+        <Image
+          source={{uri: item.image}}
+          style={styles.productImage}
+          resizeMode="cover"
+        />
         <TouchableOpacity style={styles.favoriteButton}>
-          <Icon 
-            name={item.isFavorite ? 'heart' : 'heart-outline'} 
-            size={22} 
-            color={item.isFavorite ? '#D4AF37' : '#888'} 
+          <Icon
+            name={item.isFavorite ? 'heart' : 'heart-outline'}
+            size={22}
+            color={item.isFavorite ? '#D4AF37' : '#888'}
           />
         </TouchableOpacity>
       </View>
@@ -99,10 +133,9 @@ const HomeScreen = ({ navigation }) => {
           <Text style={styles.subGreeting}>Find your perfect jewelry</Text>
         </View>
         <View style={styles.headerButtons}>
-          <TouchableOpacity 
+          <TouchableOpacity
             style={styles.headerButton}
-            onPress={() => navigation.navigate('Coupons')}
-          >
+            onPress={() => navigation.navigate('Coupons')}>
             <Icon name="ticket" size={24} color="#333" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.headerButton}>
@@ -112,8 +145,10 @@ const HomeScreen = ({ navigation }) => {
       </View>
 
       <View style={styles.bannerContainer}>
-        <Image 
-          source={{uri :'https://t4.ftcdn.net/jpg/02/92/56/91/360_F_292569116_Phht4uRj1YIuLFgBhrLu8171npBOcJcr.jpg'}} 
+        <Image
+          source={{
+            uri: 'https://t4.ftcdn.net/jpg/02/92/56/91/360_F_292569116_Phht4uRj1YIuLFgBhrLu8171npBOcJcr.jpg',
+          }}
           style={styles.bannerImage}
           resizeMode="cover"
         />

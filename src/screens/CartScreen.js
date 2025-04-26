@@ -1,22 +1,32 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, ScrollView } from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const CartScreen = ({ navigation }) => {
+const CartScreen = ({navigation}) => {
   const [cartItems, setCartItems] = useState([
-    { 
-      id: '1', 
-      name: 'Diamond Pendant', 
-      price: 899, 
-      image: 'https://assets.ajio.com/medias/sys_master/root/20250226/48aj/67beb9a02960820c49ad1ec1/-1117Wx1400H-469209621-white-MODEL.jpg',
-      quantity: 1
+    {
+      id: '1',
+      name: 'Diamond Pendant',
+      price: 899,
+      image:
+        'https://assets.ajio.com/medias/sys_master/root/20250226/48aj/67beb9a02960820c49ad1ec1/-1117Wx1400H-469209621-white-MODEL.jpg',
+      quantity: 1,
     },
-    { 
-      id: '2', 
-      name: 'Gold Ring', 
-      price: 599, 
-      image: 'https://www.caratlane.com/blog/wp-content/uploads/2023/10/2B-14.jpg',
-      quantity: 2
+    {
+      id: '2',
+      name: 'Gold Ring',
+      price: 599,
+      image:
+        'https://www.caratlane.com/blog/wp-content/uploads/2023/10/2B-14.jpg',
+      quantity: 2,
     },
   ]);
 
@@ -25,51 +35,52 @@ const CartScreen = ({ navigation }) => {
       cartItems.map(item => {
         if (item.id === id) {
           const newQuantity = Math.max(1, item.quantity + change);
-          return { ...item, quantity: newQuantity };
+          return {...item, quantity: newQuantity};
         }
         return item;
-      })
+      }),
     );
   };
 
-  const removeItem = (id) => {
+  const removeItem = id => {
     setCartItems(cartItems.filter(item => item.id !== id));
   };
 
   const getSubtotal = () => {
-    return cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    return cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   };
 
-  const renderCartItem = ({ item }) => (
+  const renderCartItem = ({item}) => (
     <View style={styles.cartItem}>
       <View style={styles.productInfo}>
-        <Image source={{uri:item.image}} style={styles.productImage} resizeMode="cover" />
+        <Image
+          source={{uri: item.image}}
+          style={styles.productImage}
+          resizeMode="cover"
+        />
         <View style={styles.productDetails}>
           <Text style={styles.productName}>{item.name}</Text>
           <Text style={styles.productPrice}>${item.price}</Text>
         </View>
       </View>
-      
+
       <View style={styles.quantityContainer}>
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.quantityButton}
-          onPress={() => changeQuantity(item.id, -1)}
-        >
+          onPress={() => changeQuantity(item.id, -1)}>
           <Icon name="remove" size={18} color="#333" />
         </TouchableOpacity>
         <Text style={styles.quantityText}>{item.quantity}</Text>
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.quantityButton}
-          onPress={() => changeQuantity(item.id, 1)}
-        >
+          onPress={() => changeQuantity(item.id, 1)}>
           <Icon name="add" size={18} color="#333" />
         </TouchableOpacity>
       </View>
-      
-      <TouchableOpacity 
+
+      <TouchableOpacity
         style={styles.removeButton}
-        onPress={() => removeItem(item.id)}
-      >
+        onPress={() => removeItem(item.id)}>
         <Icon name="trash-outline" size={20} color="#888" />
       </TouchableOpacity>
     </View>
@@ -89,7 +100,7 @@ const CartScreen = ({ navigation }) => {
             keyExtractor={item => item.id}
             contentContainerStyle={styles.cartList}
           />
-          
+
           <View style={styles.footer}>
             <View style={styles.summaryContainer}>
               <View style={styles.summaryRow}>
@@ -106,11 +117,10 @@ const CartScreen = ({ navigation }) => {
                 <Text style={styles.totalValue}>${getSubtotal() + 10}</Text>
               </View>
             </View>
-            
-            <TouchableOpacity 
+
+            <TouchableOpacity
               style={styles.checkoutButton}
-              onPress={() => navigation.navigate('Checkout')}
-            >
+              onPress={() => navigation.navigate('Checkout')}>
               <Text style={styles.checkoutButtonText}>Checkout</Text>
             </TouchableOpacity>
           </View>
@@ -119,10 +129,9 @@ const CartScreen = ({ navigation }) => {
         <View style={styles.emptyCartContainer}>
           <Icon name="cart-outline" size={80} color="#DDD" />
           <Text style={styles.emptyCartText}>Your cart is empty</Text>
-          <TouchableOpacity 
+          <TouchableOpacity
             style={styles.continueShoppingButton}
-            onPress={() => navigation.navigate('Home')}
-          >
+            onPress={() => navigation.navigate('Home')}>
             <Text style={styles.continueShoppingText}>Continue Shopping</Text>
           </TouchableOpacity>
         </View>
